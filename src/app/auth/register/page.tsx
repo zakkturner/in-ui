@@ -35,7 +35,7 @@ const RegisterPage = () => {
             Don't have an account? <Link href="./register">Register</Link>
           </span>
           <Link
-            href={`${url}/auth/redirect`}
+            href={`${url}/login/github`}
             className="bg-[#f05a1f] text-white flex justify-center items-center py-4"
           >
             Register with Github

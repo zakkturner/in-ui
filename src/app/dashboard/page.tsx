@@ -1,7 +1,11 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../hooks";
-import { getCsrfToken, getUser } from "@/store/features/user/userSlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import {
+  getCsrfToken,
+  getUser,
+  getAuthUser,
+} from "@/store/features/user/userSlice";
 import axios, { AxiosError } from "axios";
 import Drawer from "@/components/Drawer/Drawer";
 import Link from "next/link";
@@ -9,12 +13,14 @@ import Image from "next/image";
 import { Post } from "@/store/features/post/postSlice";
 
 const DashboardPage = () => {
+  const dispatch = useAppDispatch();
   const user = useAppSelector(getUser);
   const xsrf = useAppSelector(getCsrfToken);
   const url = process.env.NEXT_PUBLIC_API_URL;
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
+    dispatch(getAuthUser());
     const fetchPosts = async () => {
       try {
         const response = await axios.get(`${url}/api/user/posts`, {
@@ -33,7 +39,7 @@ const DashboardPage = () => {
       }
     };
     fetchPosts();
-  }, [xsrf]);
+  }, []);
 
   return (
     <div className="flex">

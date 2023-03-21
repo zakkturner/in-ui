@@ -24,12 +24,12 @@ export const menuItems: MenuItems[] = [
   {
     name: "register",
     url: "/auth/register",
-    needsAuth: true,
+    needsAuth: false,
   },
   {
     name: "login",
     url: "/auth/login",
-    needsAuth: true,
+    needsAuth: false,
   },
   {
     name: "contact",

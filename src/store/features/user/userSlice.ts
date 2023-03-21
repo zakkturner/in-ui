@@ -68,6 +68,33 @@ export const login = createAsyncThunk(
     }
   }
 );
+export const getAuthUser = createAsyncThunk(
+  "user/getAuthUser",
+  async (_, thunkAPI) => {
+    console.log("working");
+    const state = thunkAPI.getState() as RootState;
+
+    try {
+      const response = await axios.get(`${url}/api/user`, {
+        withCredentials: true,
+        headers: {
+          Accept: "application/json",
+          "X-XSRF-TOKEN": state.user.csrf,
+        },
+      });
+      console.log("User", response.data);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
+
+      return response.data;
+    } catch (e: unknown) {
+      console.log(e);
+      thunkAPI.rejectWithValue(e);
+      throw e;
+    }
+  }
+);
 
 // export const login = createAsyncThunk(
 //   "user/login",
@@ -111,6 +138,7 @@ export interface LoginState {
   csrf: string;
   status: "idle" | "loading" | "succeeded" | "failed" | "authenticated";
   error?: any;
+  isLoggedIn?: boolean;
 }
 
 const initialState: LoginState = {
@@ -118,6 +146,7 @@ const initialState: LoginState = {
   csrf: "",
   status: "idle",
   error: null,
+  isLoggedIn: Boolean(localStorage.getItem("user")),
 };
 
 export const userSlice = createSlice({
@@ -133,6 +162,7 @@ export const userSlice = createSlice({
       state.user = action.payload; // Set the user state to the returned User object
       state.error = null;
       state.status = "succeeded"; // Update the status to "succeeded"
+      state.isLoggedIn = true;
     });
 
     builder.addCase(login.rejected, (state, action) => {
@@ -140,10 +170,19 @@ export const userSlice = createSlice({
       state.error = action.payload;
       state.status = "failed";
     });
+    builder.addCase(getAuthUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.isLoggedIn = true;
+    });
+    builder.addCase(getAuthUser.rejected, (state, action) => {
+      state.user = null;
+      state.error = action.payload;
+    });
   },
 });
 export const getCsrfToken = (state: RootState) => state.user.csrf;
 export const getUserStatus = (state: RootState) => state.user.status;
 export const getUser = (state: RootState) => state.user.user;
+export const isLoggedIn = (state: RootState) => state.user.isLoggedIn;
 
 export default userSlice.reducer;

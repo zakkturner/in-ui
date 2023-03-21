@@ -5,7 +5,7 @@ const Drawer = ({ user }: { user: User }) => {
   return (
     <div className=" bg-white min-h-screen w-2/12 shadow-sm">
       <div className="py-2 px-6 border-b border-gray text-center">
-        Hello, {user.name}
+        Hello, {user?.name}
       </div>
       <ul className="py-2 px-6">
         <li>
