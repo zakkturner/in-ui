@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector, useAppDispatch } from "@/app/hooks";
-import { login, getCrsfToken, getCsrf } from "@/store/features/user/userSlice";
+import { login, getCsrfToken, getCsrf } from "@/store/features/user/userSlice";
 import { useCookies } from "react-cookie";
 const LoginPage = () => {
   const dispatch = useAppDispatch();

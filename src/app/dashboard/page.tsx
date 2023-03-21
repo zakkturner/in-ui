@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks";
-import { getCrsfToken, getUser } from "@/store/features/user/userSlice";
-import axios from "axios";
+import { getCsrfToken, getUser } from "@/store/features/user/userSlice";
+import axios, { AxiosError } from "axios";
 import Drawer from "@/components/Drawer/Drawer";
 import Link from "next/link";
 import Image from "next/image";
@@ -10,7 +10,7 @@ import { Post } from "@/store/features/post/postSlice";
 
 const DashboardPage = () => {
   const user = useAppSelector(getUser);
-  const xsrf = useAppSelector(getCrsfToken);
+  const xsrf = useAppSelector(getCsrfToken);
   const url = process.env.NEXT_PUBLIC_API_URL;
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -28,7 +28,8 @@ const DashboardPage = () => {
         console.log(posts);
         setPosts(posts);
       } catch (error) {
-        console.log(error.response.data);
+        const err = error as AxiosError;
+        console.log(err.response?.data);
       }
     };
     fetchPosts();

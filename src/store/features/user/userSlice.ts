@@ -55,7 +55,9 @@ export const login = createAsyncThunk(
         },
       });
       console.log("User: ", response.data);
-      localStorage.setItem("user", JSON.stringify(response.data));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("user", JSON.stringify(response.data));
+      }
       // Return the User object from the response
       return response.data;
     } catch (e: unknown) {
@@ -140,7 +142,7 @@ export const userSlice = createSlice({
     });
   },
 });
-export const getCrsfToken = (state: RootState) => state.user.csrf;
+export const getCsrfToken = (state: RootState) => state.user.csrf;
 export const getUserStatus = (state: RootState) => state.user.status;
 export const getUser = (state: RootState) => state.user.user;
 

@@ -4,6 +4,7 @@ import { Providers } from "@/store/provider";
 import Header from "@/components/ui/Header/Header";
 import Footer from "@/components/ui/Footer/Footer";
 import { CookiesProvider } from "react-cookie";
+import { UrlContext } from "@/context/UrlContext";
 
 export const metadata = {
   title: "Create Next App",
@@ -20,9 +21,11 @@ export default function RootLayout({
       <body className="flex flex-col">
         <Providers>
           <CookiesProvider>
-            <Header />
-            <div className="min-h-screen">{children}</div>
-            <Footer />
+            <UrlContext.Provider value={process.env.NEXT_PUBLIC_API_URL}>
+              <Header />
+              <div className="min-h-screen">{children}</div>
+              <Footer />
+            </UrlContext.Provider>
           </CookiesProvider>
         </Providers>
       </body>

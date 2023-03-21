@@ -10,14 +10,10 @@ export const menuItems: MenuItems[] = [
     url: "/",
     needsAuth: false,
   },
-  {
-    name: "about",
-    url: "/about",
-    needsAuth: false,
-  },
+
   {
     name: "create",
-    url: "/post/create",
+    url: "/posts/create",
     needsAuth: true,
   },
   {

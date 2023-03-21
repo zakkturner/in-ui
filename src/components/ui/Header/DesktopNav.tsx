@@ -21,14 +21,14 @@ const DesktopNav = () => {
           {/* <span>Hello, <Link className="mobile-nav-link" href="/dashboard"></Link></span> */}
         </li>
       </ul>
-      <div className="flex">
-        <a href="#" className="">
+      <div className="flex justify-between w-1/12">
+        <a href="#" className="text-[#28aae2]">
           <FaInstagram />
         </a>
-        <a href="#" className="">
+        <a href="#" className="text-[#28aae2]">
           <FaTwitter />
         </a>
-        <a href="#" className="">
+        <a href="#" className="text-[#28aae2]">
           <FaFacebook />
         </a>
       </div>

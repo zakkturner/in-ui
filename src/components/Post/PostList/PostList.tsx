@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/app/hooks";
 import Link from "next/link";
 import Image from "next/image";
+import { UrlContext } from "@/context/UrlContext";
 
 import { AppDispatch } from "@/store/store";
 import {
@@ -18,6 +19,7 @@ const PostsList = () => {
   const posts = useAppSelector(getAllPosts);
   const status = useAppSelector(getPostsStatus);
   const error = useAppSelector((state: any) => state.error);
+  const url = useContext(UrlContext);
 
   useEffect(() => {
     console.log(status);
@@ -43,14 +45,21 @@ const PostsList = () => {
           <PostCard>
             <img
               className=""
-              src={`${post.post_image[0].post_image_path}`}
+              src={
+                post.post_image[0]?.post_image_path.includes("https")
+                  ? `${post.post_image[0]?.post_image_path}`
+                  : `${url}/storage/${post.post_image[0]?.post_image_path}`
+              }
               alt="Sunset in the mountains"
               width="350"
               height="auto"
             />
             <div className="flex flex-col w-full">
               <div className="px-6 py-4 bg-white w-full">
-                <Link href={`${post.id}`} className="font-bold text-xl mb-2">
+                <Link
+                  href={`/post/${post.id}`}
+                  className="font-bold text-xl mb-2"
+                >
                   {post.title}
                 </Link>
                 <p>{post.user.name}</p>
@@ -58,7 +67,7 @@ const PostsList = () => {
                   {post.body.substring(0, 80)}
                 </p>
                 <Link
-                  href={`${post.id}`}
+                  href={`/post/${post.id}`}
                   className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded uppercase"
                 >
                   Read More
