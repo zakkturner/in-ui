@@ -1,7 +1,6 @@
 "use client";
 import { Inter } from "next/font/google";
 
-import { useEffect } from "react";
 import PostsList from "@/components/Post/PostList/PostList";
 
 import SideBar from "@/components/SideBar/SideBar";
