@@ -4,6 +4,7 @@ import { Post } from "@/store/features/post/postSlice";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { usePathname } from "next/navigation";
+import SideBar from "@/components/SideBar/SideBar";
 
 const BlogPostPage = () => {
   const [post, setPost] = useState<Post | null>(null);
@@ -22,7 +23,11 @@ const BlogPostPage = () => {
     };
     fetchPost();
   });
-  return <div>{post ? post.title : "Hello"}</div>;
+  return (
+    <div className="flex w-8/12 mx-auto justify-between">
+      <SideBar />
+    </div>
+  );
 };
 
 export default BlogPostPage;

@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import DesktopLink from "./DesktopLink";

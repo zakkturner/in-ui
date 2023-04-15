@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useContext } from "react";
 import { useDispatch } from "react-redux";
 import { useAppSelector } from "@/app/hooks";
@@ -57,7 +58,7 @@ const PostsList = () => {
             <div className="flex flex-col w-full">
               <div className="px-6 py-4 bg-white w-full">
                 <Link
-                  href={`/post/${post.id}`}
+                  href={`/posts/${post.id}`}
                   className="font-bold text-xl mb-2"
                 >
                   {post.title}
@@ -67,7 +68,7 @@ const PostsList = () => {
                   {post.body.substring(0, 80)}
                 </p>
                 <Link
-                  href={`/post/${post.id}`}
+                  href={`/posts/${post.id}`}
                   className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded uppercase"
                 >
                   Read More

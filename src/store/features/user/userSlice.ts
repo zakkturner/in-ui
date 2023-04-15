@@ -26,6 +26,10 @@ export const getCsrf = createAsyncThunk("user/getCsrf", async () => {
   });
   return Object.values(response.config.headers).flat()[1];
 });
+
+/**
+ * User Auth Thunks
+ */
 export const login = createAsyncThunk(
   "user/login",
   async (args: Args, { getState }) => {
@@ -54,7 +58,8 @@ export const login = createAsyncThunk(
           "X-XSRF-TOKEN": state.user.csrf,
         },
       });
-      console.log("User: ", response.data);
+
+      // If window is no
       if (typeof window !== "undefined") {
         localStorage.setItem("user", JSON.stringify(response.data));
       }
@@ -96,43 +101,6 @@ export const getAuthUser = createAsyncThunk(
   }
 );
 
-// export const login = createAsyncThunk(
-//   "user/login",
-//   async (args: Args, { getState }) => {
-//     const state = getState() as RootState; // Cast the state to the RootState interface
-//     const { email, password } = args;
-//     console.log(email);
-//     try {
-//       console.log(state.user.csrf, email, password);
-
-//       await axios.post(
-//         `${url}/login`,
-//         { email, password },
-//         {
-//           withCredentials: true,
-//           headers: {
-//             Accept: "application/json",
-//             "X-XSRF-TOKEN": state.user.csrf, // Access the csrf value directly
-//           },
-//         }
-//       );
-
-//       const response: AxiosResponse<User> = await axios.get(`${url}/api/user`, {
-//         withCredentials: true,
-//         headers: {
-//           Accept: "application/json",
-//           "X-XSRF-TOKEN": state.user.csrf, // Access the csrf value directly
-//         },
-//       });
-//       console.log("User: ", response.data);
-//       //   window.location.pathname = "./dashboard/";
-//     } catch (e: unknown) {
-//       console.log(e);
-//       state.user.error = Object.values(e.response).flat().join(", ");
-//       state.user.status = "failed";
-//     }
-//   }
-// );
 export interface LoginState {
   user: User | any;
   csrf: string;
