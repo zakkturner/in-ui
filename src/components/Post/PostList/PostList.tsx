@@ -25,8 +25,6 @@ const PostsList = () => {
     console.log(status);
     if (status === "idle") {
       dispatch(getPosts());
-
-      console.log("Posts", posts);
     }
   }, [dispatch, status]);
 
