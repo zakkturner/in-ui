@@ -12,7 +12,7 @@ const MobileMenu = ({ isOpen }: { isOpen: boolean }) => {
   const prevIsOpen = useRef(false);
   const csrf = useAppSelector(getCsrf);
   const url = process.env.NEXT_PUBLIC_API_URL;
-  const handleLogOut = (e) => {
+  const handleLogOut = (e: any) => {
     e.preventDefault();
     axios.post(
       `${url}/logout`,

@@ -18,14 +18,7 @@ const LoginPage = () => {
 
     dispatch(login({ email, password }));
   };
-  //   const [cookies, setCookie] = useCookies(["X-XSRF-Token"]);
-  //   const csrfToken = useAppSelector(getCrsfToken);
-  //   const handleLogin = (e) => {
-  //     e.preventDefault();
-  //     dispatch(getCsrf());
-  //     dispatch(login({ email, password }));
-  //     console.log("Cookies", cookies);
-  //   };
+
   return (
     <main className="flex w-8/12 mx-auto justify-between">
       <form onSubmit={handleSubmit}>
@@ -37,14 +30,14 @@ const LoginPage = () => {
             type="email"
             id="email"
             name="email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: any) => setEmail(e.target.value)}
           />
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e: any) => setPassword(e.target.value)}
           />
           <button type="submit">Log In</button>
           <span>
