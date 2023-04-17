@@ -13,7 +13,7 @@ const CreatePage = () => {
   const [body, setBody] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const url = useContext(UrlContext);
-  const xsrf = useAppSelector(getCsrfToken);
+  const csrf: any = useAppSelector(getCsrfToken);
   const handleFile = (e: any) => {
     const files = e.target.files;
     if (files && files.length > 0) {
@@ -36,7 +36,7 @@ const CreatePage = () => {
           headers: {
             "Content-Type": "multipart/form-data",
             Accept: "application/json",
-            "X-XSRF-TOKEN": xsrf,
+            "X-XSRF-TOKEN": csrf,
           },
         })
         .then((response) => {

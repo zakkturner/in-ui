@@ -29,7 +29,9 @@ const DesktopNav = () => {
         },
       }
     );
-    localStorage.removeItem("user");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("user");
+    }
     router.push("/");
   };
   return (
