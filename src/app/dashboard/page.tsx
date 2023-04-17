@@ -15,7 +15,7 @@ import { Post } from "@/store/features/post/postSlice";
 const DashboardPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(getUser);
-  const xsrf = useAppSelector(getCsrfToken);
+  const csrf: any = useAppSelector(getCsrfToken);
   const url = process.env.NEXT_PUBLIC_API_URL;
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -27,7 +27,7 @@ const DashboardPage = () => {
           withCredentials: true,
           headers: {
             Accept: "application/json",
-            "X-XSRF-TOKEN": xsrf,
+            "X-XSRF-TOKEN": csrf,
           },
         });
         const posts: Post[] = response.data;

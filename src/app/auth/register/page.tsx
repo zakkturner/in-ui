@@ -21,14 +21,14 @@ const RegisterPage = () => {
             type="email"
             id="email"
             name="email"
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e: any) => console.log(e.target.value)}
           />
           <label htmlFor="password">Password</label>
           <input
             type="password"
             id="password"
             name="password"
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e: any) => console.log(e.target.value)}
           />
           <button type="submit">Log In</button>
           <span>

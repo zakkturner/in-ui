@@ -66,7 +66,6 @@ export const login = createAsyncThunk(
       // Return the User object from the response
       return response.data;
     } catch (e: unknown) {
-      console.log(e);
       state.user.error = e;
       state.user.status = "failed";
       throw e;
@@ -94,7 +93,6 @@ export const getAuthUser = createAsyncThunk(
 
       return response.data;
     } catch (e: unknown) {
-      console.log(e);
       thunkAPI.rejectWithValue(e);
       throw e;
     }

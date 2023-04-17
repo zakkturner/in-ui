@@ -63,7 +63,7 @@ const CreatePage = () => {
               type="text"
               name="title"
               className="bg-[#c9c9c9]"
-              onChange={(e) => {
+              onChange={(e: any) => {
                 setTitle(e.target.value);
               }}
             />
@@ -76,7 +76,7 @@ const CreatePage = () => {
               cols={30}
               rows={10}
               className="bg-[#c9c9c9]"
-              onChange={(e) => {
+              onChange={(e: any) => {
                 setBody(e.target.value);
               }}
             ></textarea>

@@ -10,7 +10,7 @@ import axios from "axios";
 const MobileMenu = ({ isOpen }: { isOpen: boolean }) => {
   const menu = useRef(null);
   const prevIsOpen = useRef(false);
-  const csrf = useAppSelector(getCsrf);
+  const csrf: any = useAppSelector(getCsrf);
   const url = process.env.NEXT_PUBLIC_API_URL;
   const handleLogOut = (e: any) => {
     e.preventDefault();
