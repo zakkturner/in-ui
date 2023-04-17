@@ -5,7 +5,7 @@ import { store } from "./store";
 import { CookiesProvider } from "react-cookie";
 import { UrlContext } from "@/context/UrlContext";
 
-export function Providers({ children }) {
+export function Providers({ children }: { children: any }) {
   return (
     <Provider store={store}>
       <CookiesProvider>

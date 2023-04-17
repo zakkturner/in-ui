@@ -12,10 +12,10 @@ import { useRouter } from "next/navigation";
 
 const DesktopNav = () => {
   const url = useContext(UrlContext);
-  const csrf = useAppSelector(getCsrf);
+  const csrf: any = useAppSelector(getCsrf);
   const isLogged = useAppSelector(isLoggedIn);
   const router = useRouter();
-  const handleLogOut = (e) => {
+  const handleLogOut = (e: any) => {
     e.preventDefault();
     console.log();
     axios.post(

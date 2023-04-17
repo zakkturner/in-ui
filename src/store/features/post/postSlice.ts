@@ -3,6 +3,7 @@
 import { RootState } from "@/store/store";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { User } from "../user/userSlice";
 const url = process.env.NEXT_PUBLIC_API_URL;
 
 export interface Post {
@@ -13,7 +14,7 @@ export interface Post {
   post_image: PostImage[];
   updated_at: string;
   created_at: string;
-  user: [];
+  user: User;
 }
 export interface PostImage {
   blog_post_id: number;

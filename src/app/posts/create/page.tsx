@@ -1,21 +1,28 @@
 "use client";
 
 import Editor from "@/components/ui/RTE/Slate";
-import { useState, useContext } from "react";
+import { useState, useContext, FormEvent } from "react";
 import axios from "axios";
 
 import { UrlContext } from "@/context/UrlContext";
 import { useAppSelector } from "@/app/hooks";
 import { getCsrfToken } from "@/store/features/user/userSlice";
+
 const CreatePage = () => {
   const [title, setTitle] = useState<string>("");
   const [body, setBody] = useState<string>("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const url = useContext(UrlContext);
   const xsrf = useAppSelector(getCsrfToken);
-  const handleSubmit = async (e: Event) => {
-    e.preventDefault();
+  const handleFile = (e: any) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      setSelectedFile(files[0]);
+    }
+  };
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+    e.preventDefault();
     try {
       const formData = new FormData();
       console.log(selectedFile);
@@ -66,8 +73,8 @@ const CreatePage = () => {
               Body
             </label>
             <textarea
-              cols="30"
-              rows="10"
+              cols={30}
+              rows={10}
               className="bg-[#c9c9c9]"
               onChange={(e) => {
                 setBody(e.target.value);
@@ -83,7 +90,7 @@ const CreatePage = () => {
               type="file"
               accept="image/jpeg, image/png, image/jpg"
               className=""
-              onChange={(e) => setSelectedFile(e.target.files[0])}
+              onChange={handleFile}
             />
           </div>
           <button
