@@ -108,11 +108,15 @@ export interface LoginState {
 }
 
 const initialState: LoginState = {
-  user: JSON.parse(localStorage.getItem("user") || "{}"),
+  user: JSON.parse(
+    (typeof window !== "undefined" && localStorage.getItem("user")) || "{}"
+  ),
   csrf: "",
   status: "idle",
   error: null,
-  isLoggedIn: Boolean(localStorage.getItem("user")),
+  isLoggedIn: Boolean(
+    typeof window !== "undefined" && localStorage.getItem("user")
+  ),
 };
 
 export const userSlice = createSlice({
