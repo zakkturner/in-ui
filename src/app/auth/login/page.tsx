@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useAppSelector, useAppDispatch } from "@/app/hooks";
-import { login, getCsrfToken, getCsrf } from "@/store/features/user/userSlice";
-import { useCookies } from "react-cookie";
+
+import { useAppDispatch } from "@/app/hooks";
+import { login, getCsrf } from "@/store/features/user/userSlice";
+
 const LoginPage = () => {
   const dispatch = useAppDispatch();
   const [password, setPassword] = useState("");

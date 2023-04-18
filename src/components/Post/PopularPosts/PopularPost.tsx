@@ -1,17 +1,12 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useContext, useEffect } from "react";
+
 import { useAppSelector } from "@/app/hooks";
-import { AppDispatch } from "@/store/store";
-import axios from "axios";
-import {
-  getPosts,
-  Post,
-  getAllPosts,
-  getPostsStatus,
-} from "../../../store/features/post/postSlice";
+
+import { getAllPosts } from "../../../store/features/post/postSlice";
+import { UrlContext } from "@/context/UrlContext";
 
 const PopularPosts = () => {
-  //   const dispatch = useDispatch<AppDispatch>();
+  const url = useContext(UrlContext);
   const posts = useAppSelector(getAllPosts);
   useEffect(() => {
     console.log();
@@ -33,7 +28,11 @@ const PopularPosts = () => {
             <div className="w-1/2">
               <img
                 className="w-full "
-                src={`${post.post_image[0].post_image_path}`}
+                src={
+                  post.post_image[0]?.post_image_path.includes("https")
+                    ? `${post.post_image[0]?.post_image_path}`
+                    : `${url}/storage/${post.post_image[0]?.post_image_path}`
+                }
                 alt="Sunset in the mountains"
                 width="100"
                 height="auto"

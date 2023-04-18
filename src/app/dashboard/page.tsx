@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   getCsrfToken,
@@ -9,14 +9,13 @@ import {
 import axios, { AxiosError } from "axios";
 import Drawer from "@/components/Drawer/Drawer";
 import Link from "next/link";
-import Image from "next/image";
 import { Post } from "@/store/features/post/postSlice";
-
+import { UrlContext } from "@/context/UrlContext";
 const DashboardPage = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector(getUser);
   const csrf: any = useAppSelector(getCsrfToken);
-  const url = process.env.NEXT_PUBLIC_API_URL;
+  const url = useContext(UrlContext);
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -48,29 +47,34 @@ const DashboardPage = () => {
       <div className="p-6">
         <h2 className="text-xl font-bold mb-4">Posts</h2>
         <ul>
-          {posts.map((post) => (
-            <li
-              className="flex items-center justify-between bg-white shadow-sm mb-2"
-              key={post.id}
-            >
-              <img
-                className="mr-4"
-                src={post.post_image[0].post_image_path}
-                width="100"
-                height="100"
-                alt={post.post_image[0].post_image_caption}
-              />
-              <p className="mr-4">{post.title}</p>
-              <div className="pr-4">
-                <Link className="mr-4" href={`/edit/${post.id}`}>
-                  Edit
-                </Link>
-                <Link className="" href={`/${post.id}`}>
-                  View
-                </Link>
-              </div>
-            </li>
-          ))}
+          {posts &&
+            posts.map((post) => (
+              <li
+                className="flex items-center justify-between bg-white shadow-sm mb-2"
+                key={post.id}
+              >
+                <img
+                  className="mr-4"
+                  src={
+                    post.post_image[0]?.post_image_path.includes("https")
+                      ? `${post.post_image[0]?.post_image_path}`
+                      : `${url}/storage/${post.post_image[0]?.post_image_path}`
+                  }
+                  width="100"
+                  height="100"
+                  alt={post.post_image[0].post_image_caption}
+                />
+                <p className="mr-4">{post.title} </p>
+                <div className="pr-4">
+                  <Link className="mr-4" href={`/dashboard/edit/${post.id}`}>
+                    Edit
+                  </Link>
+                  <Link className="" href={`/${post.id}`}>
+                    View
+                  </Link>
+                </div>
+              </li>
+            ))}
         </ul>
       </div>
     </div>

@@ -1,9 +1,8 @@
 "use client";
-import Link from "next/link";
 import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import DesktopLink from "./DesktopLink";
 import { menuItems } from "@/app/helpers/utils";
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 import { UrlContext } from "@/context/UrlContext";
 import { useAppSelector } from "@/app/hooks";
 import { getCsrf, isLoggedIn } from "@/store/features/user/userSlice";
